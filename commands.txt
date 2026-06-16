@@ -1,0 +1,16 @@
+docker network create --driver bridge web-net
+
+docker run -d --name frontend --network web-net nginx
+
+docker run -d --name backend --network web-net httpd
+
+docker network inspect web-net
+
+docker exec -it frontend bash
+
+apt update
+apt install iputils-ping curl -y
+
+ping backend
+
+curl http://backend
